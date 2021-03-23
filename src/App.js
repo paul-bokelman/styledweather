@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useEffect } from "react";
+import { Context } from "./components/Context";
+import "./App.css";
+import firebase from "./components/firebase";
+import { handleSignup, handleSignin } from "./components/FirebaseFunctions";
+import { getData } from "./components/getData";
 function App() {
+  const email = "paul.bokelman1@gmail.com";
+  const password = "password";
+  useEffect(() => {
+    getData();
+  }, []);
+  // const { accounts } = useContext(Context); //# other components
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Context.Provider value={{ firebase }}>
+        <button onClick={() => handleSignup(email, password)}>signup</button>
+        <button onClick={() => handleSignin(email, password)}>signin</button>
+        <h1>hi</h1>
+      </Context.Provider>
     </div>
   );
 }
