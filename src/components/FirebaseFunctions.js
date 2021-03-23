@@ -1,5 +1,6 @@
 import firebase from "./firebase";
 const db = firebase.firestore();
+
 export const handleSignup = (email, password) => {
   // {email, password}
   firebase
@@ -27,6 +28,7 @@ export const handleSignup = (email, password) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+
       console.error(errorCode, errorMessage);
       // ..
     });
@@ -60,6 +62,7 @@ export const handleSignin = (email, password) => {
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
+
       console.error(errorCode, errorMessage);
     });
 };

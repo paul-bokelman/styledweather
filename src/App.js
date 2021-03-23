@@ -1,22 +1,67 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Context } from "./components/Context";
 import "./App.css";
 import firebase from "./components/firebase";
-import { handleSignup, handleSignin } from "./components/FirebaseFunctions";
-import { getData } from "./components/getData";
+import { handleSignup, handleSignin } from "./components/FirebaseFunctions"; //# firebase functions
+import { getData } from "./components/getData"; //# api data
 function App() {
-  const email = "paul.bokelman1@gmail.com";
-  const password = "password";
-  useEffect(() => {
-    getData();
-  }, []);
-  // const { accounts } = useContext(Context); //# other components
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
+  const [error, setError] = useState("");
+  // useEffect(() => {
+  //   getData();
+  // }, []);her components
   return (
     <div className="App">
-      <Context.Provider value={{ firebase }}>
-        <button onClick={() => handleSignup(email, password)}>signup</button>
-        <button onClick={() => handleSignin(email, password)}>signin</button>
-        <h1>hi</h1>
+      <Context.Provider value={{ firebase, setError }}>
+        <h1>login system</h1>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (loggingIn === false) {
+              handleSignup(email, password);
+            } else {
+              handleSignin(email, password);
+              setUser(firebase.auth().currentUser);
+            }
+          }}
+        >
+          <label>
+            Name: <br />
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Password: <br />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
+            />
+          </label>
+          <br />
+          {error !== "" ? <p className="err">{error}</p> : null}
+          <input type="submit" value={loggingIn ? "Login" : "Signup"} />
+          <p>
+            {loggingIn ? "Don't have an account?" : "Already have an account?"}
+            <span onClick={() => setLoggingIn(!loggingIn)}>
+              {loggingIn ? " Create an account." : " Login."}
+            </span>
+          </p>
+        </form>
+        {user !== null ? (
+          <h2>
+            current user: email: {user.email}, uid: {user.uid}
+          </h2>
+        ) : null}
       </Context.Provider>
     </div>
   );
