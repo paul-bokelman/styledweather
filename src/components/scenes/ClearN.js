@@ -48,6 +48,7 @@ export const ClearN = () => {
       animationData: clearN, // the path to the animation json
     });
   }, []);
+
   return (
     <div>
       <Helmet>

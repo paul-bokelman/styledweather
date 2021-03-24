@@ -42,7 +42,7 @@ function App() {
   //   }
   // };
 
-  // const q = "San Diego"; // query for api
+  // const q = "Rhode Island"; // query for api
 
   // useEffect(() => {
   //   console.log(
