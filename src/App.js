@@ -17,6 +17,8 @@ function App() {
   const [condition, setCondition] = useState("");
   const [tempF, setTempF] = useState("");
   const [tempC, setTempC] = useState("");
+  const [isDay, setIsDay] = useState("");
+  const [mainCondition, setMainCondition] = useState("");
 
   const weatherData = {
     locationInfo,
@@ -25,39 +27,40 @@ function App() {
     tempC,
   };
 
-  const splitString = (string, num) => {
-    const split = string.split(" ");
-    const splitRes = split[num];
-    if (num === 0) {
-      return splitRes;
-    } else {
-      if (splitRes.length === 4) {
-        const zero = "0";
-        return zero.concat(splitRes);
-      } else {
-        return splitRes;
-      }
-    }
-  };
+  // const splitString = (string, num) => {
+  //   const split = string.split(" ");
+  //   const splitRes = split[num];
+  //   if (num === 0) {
+  //     return splitRes;
+  //   } else {
+  //     if (splitRes.length === 4) {
+  //       const zero = "0";
+  //       return zero.concat(splitRes);
+  //     } else {
+  //       return splitRes;
+  //     }
+  //   }
+  // };
 
-  const q = "San Diego"; // query for api
+  // const q = "San Diego"; // query for api
 
-  useEffect(() => {
-    console.log(
-      getData(q).then((data) => {
-        console.log(data);
-        const dateTime = data.location.localtime;
-        const date = splitString(dateTime, 0).replace(/-/g, ".");
-        const time = splitString(dateTime, 1);
-        const tempF = data.current.temp_f.toString().split(".")[0];
-        const tempC = data.current.temp_c.toString().split(".")[0];
-        setLocationInfo({ name: data.location.name, date, time });
-        setCondition(data.current.condition.text);
-        setTempF(tempF);
-        setTempC(tempC);
-      })
-    );
-  }, []);
+  // useEffect(() => {
+  //   console.log(
+  //     getData(q).then((data) => {
+  //       console.log(data);
+  //       const dateTime = data.location.localtime;
+  //       const date = splitString(dateTime, 0).replace(/-/g, ".");
+  //       const time = splitString(dateTime, 1);
+  //       const tempF = data.current.temp_f.toString().split(".")[0];
+  //       const tempC = data.current.temp_c.toString().split(".")[0];
+  //       const isDay = data.current.is_day;
+  //       setLocationInfo({ name: data.location.name, date, time });
+  //       setCondition(data.current.condition.text);
+  //       setTempF(tempF);
+  //       setTempC(tempC);
+  //     })
+  //   );
+  // }, []);
 
   return (
     <div className="App">

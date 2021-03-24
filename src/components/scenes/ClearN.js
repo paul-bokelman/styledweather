@@ -24,13 +24,12 @@ export const ClearN = () => {
     if (weatherData.locationInfo.name !== undefined) {
       console.log(weatherData.locationInfo.name);
       const name = weatherData.locationInfo.name;
-      const nameLength = name.length;
-      console.log(nameLength);
-      if (nameLength >= 9) {
-        setBGTextSize("20.5");
-      } else if (nameLength === 10) {
+      console.log(name.length);
+      if (name.length <= 9) {
+        setBGTextSize("18.5");
+      } else if (name.length === 10) {
         setBGTextSize("17");
-      } else if (nameLength >= 11) {
+      } else if (name.length >= 12) {
         setBGTextSize("14.5");
       }
     }
