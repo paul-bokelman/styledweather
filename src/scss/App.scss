@@ -1,0 +1,29 @@
+html[data-theme="night"] {
+  --background: #0e0e2a;
+}
+
+html[data-theme="day"] {
+  --background: #9abcff;
+}
+
+html[data-theme="day-hazy"] {
+  --background: #b8c3d8;
+}
+
+body {
+  background-color: var(--background);
+}
+
+.App {
+  text-align: center;
+
+  span {
+    cursor: pointer;
+    color: blue;
+  }
+
+  .err {
+    color: red;
+    font-size: small;
+  }
+}
