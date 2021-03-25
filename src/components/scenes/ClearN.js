@@ -11,33 +11,15 @@ import lottie from "lottie-web";
 import clearN from "../../lottie/clearN.json";
 
 export const ClearN = () => {
-  const [bgTextSize, setBGTextSize] = useState("20.5");
-  const [F, setF] = useState(true);
-  const { weatherData } = useContext(Context);
-
+  const { weatherData, bgTextSize, tempLength } = useContext(Context);
   const container = useRef(null);
-  //   setInterval(function() {
-  //      USE FOR TIME
-  // }, 60 * 1000);
+  const [F, setF] = useState(true);
+  const [lengthIndex, setLengthIndex] = useState(0);
 
-  const calculateBgSize = useCallback(() => {
-    if (weatherData.locationInfo.name !== undefined) {
-      console.log(weatherData.locationInfo.name);
-      const name = weatherData.locationInfo.name;
-      console.log(name.length);
-      if (name.length <= 9) {
-        setBGTextSize("18.5");
-      } else if (name.length === 10) {
-        setBGTextSize("17");
-      } else if (name.length >= 12) {
-        setBGTextSize("14.5");
-      }
-    }
-  }, [weatherData]);
-
-  useEffect(() => {
-    calculateBgSize();
-  }, [calculateBgSize, weatherData]);
+  const tempSwitch = () => {
+    setF(!F);
+    setLengthIndex((prev) => (prev + 1) % 2);
+  };
 
   useEffect(() => {
     lottie.loadAnimation({
@@ -50,20 +32,17 @@ export const ClearN = () => {
   }, []);
 
   return (
-    <div>
-      <Helmet>
-        <html data-theme="night" />
-      </Helmet>
-      <div className="clearN" ref={container}></div>
+    <div className="clearN">
+      <div className="icon" ref={container}></div>
       {weatherData.tempC !== "" ? (
         <>
-          <div className="clearNbackgroundText">
+          <div className="backgroundText bgTxt">
             <h2 style={{ fontSize: `${bgTextSize}vw` }} className="noselect">
               {weatherData.locationInfo.name}
             </h2>
           </div>
 
-          <div className="clearNCondition">
+          <div className="condition">
             <h2>Clear</h2>
             <ul>
               <li className="item time">{weatherData.locationInfo.time}</li>
@@ -71,10 +50,19 @@ export const ClearN = () => {
             </ul>
           </div>
 
-          <div className="clearNTemp">
-            <h2>
-              {F ? `${weatherData.tempF}` : `${weatherData.tempC}`}{" "}
-              <span onClick={() => setF(!F)}>{F ? "°F" : "°C"}</span>
+          <div className="temp">
+            <h2
+              onClick={tempSwitch}
+              className={
+                tempLength[lengthIndex] === 1
+                  ? "one"
+                  : tempLength[lengthIndex] === 2
+                  ? "two"
+                  : "three"
+              }
+            >
+              {F ? `${weatherData.tempF}` : `${weatherData.tempC}`}
+              <span onClick={tempSwitch}>{F ? "°F" : "°C"}</span>
             </h2>
           </div>
 
@@ -82,13 +70,13 @@ export const ClearN = () => {
         </>
       ) : (
         <>
-          <div className="clearNbackgroundText">
+          <div className="backgroundText bgTxt">
             <h2 style={{ fontSize: `20.5vw` }} className="noselect">
               New York
             </h2>
           </div>
 
-          <div className="clearNCondition ">
+          <div className="condition">
             <h2>Clear</h2>
             <ul>
               <li className="item time">01:23</li>
@@ -96,9 +84,9 @@ export const ClearN = () => {
             </ul>
           </div>
 
-          <div className="clearNTemp">
-            <h2>
-              72 <span>°F</span>
+          <div className="temp">
+            <h2 className="three">
+              123 <span>°F</span>
             </h2>
           </div>
         </>

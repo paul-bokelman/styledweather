@@ -17,8 +17,10 @@ function App() {
   const [condition, setCondition] = useState("");
   const [tempF, setTempF] = useState("");
   const [tempC, setTempC] = useState("");
-  const [isDay, setIsDay] = useState("");
+  const [isDay, setIsDay] = useState(1);
   const [mainCondition, setMainCondition] = useState("");
+  const [bgTextSize, setBGTextSize] = useState("20.5");
+  const [tempLength, setTempLength] = useState([]);
 
   const weatherData = {
     locationInfo,
@@ -27,45 +29,74 @@ function App() {
     tempC,
   };
 
-  // const splitString = (string, num) => {
-  //   const split = string.split(" ");
-  //   const splitRes = split[num];
-  //   if (num === 0) {
-  //     return splitRes;
-  //   } else {
-  //     if (splitRes.length === 4) {
-  //       const zero = "0";
-  //       return zero.concat(splitRes);
-  //     } else {
-  //       return splitRes;
-  //     }
-  //   }
-  // };
+  const calcTempLength = (tempF, tempC) => {
+    const tempLength = [];
+    tempLength.push(tempF.length, tempC.length);
+    console.log(tempLength);
+    setTempLength(tempLength);
+  };
 
-  // const q = "Rhode Island"; // query for api
+  const calculateBgSize = (name) => {
+    console.log(name.length);
+    if (name.length <= 9) {
+      setBGTextSize("18.5");
+    } else if (name.length === 10) {
+      setBGTextSize("17");
+    } else if (name.length >= 12) {
+      setBGTextSize("14.5");
+    }
+  };
 
-  // useEffect(() => {
-  //   console.log(
-  //     getData(q).then((data) => {
-  //       console.log(data);
-  //       const dateTime = data.location.localtime;
-  //       const date = splitString(dateTime, 0).replace(/-/g, ".");
-  //       const time = splitString(dateTime, 1);
-  //       const tempF = data.current.temp_f.toString().split(".")[0];
-  //       const tempC = data.current.temp_c.toString().split(".")[0];
-  //       const isDay = data.current.is_day;
-  //       setLocationInfo({ name: data.location.name, date, time });
-  //       setCondition(data.current.condition.text);
-  //       setTempF(tempF);
-  //       setTempC(tempC);
-  //     })
-  //   );
-  // }, []);
+  const splitString = (string, num) => {
+    const split = string.split(" ");
+    const splitRes = split[num];
+    if (num === 0) {
+      return splitRes;
+    } else {
+      if (splitRes.length === 4) {
+        const zero = "0";
+        return zero.concat(splitRes);
+      } else {
+        return splitRes;
+      }
+    }
+  };
 
+  const q = "San Diego"; // query for api
+
+  useEffect(() => {
+    console.log(
+      getData(q).then((data) => {
+        console.log(data);
+        const dateTime = data.location.localtime;
+        const date = splitString(dateTime, 0).replace(/-/g, ".");
+        const time = splitString(dateTime, 1);
+        const tempF = data.current.temp_f.toString().split(".")[0];
+        const tempC = data.current.temp_c.toString().split(".")[0];
+        const isDay = data.current.is_day;
+        calculateBgSize(data.location.name);
+        calcTempLength(tempF, tempC);
+        setIsDay(isDay);
+        setLocationInfo({ name: data.location.name, date, time });
+        setCondition(data.current.condition.text);
+        setTempF(tempF);
+        setTempC(tempC);
+      })
+    );
+  }, []);
+
+  //# STRING CHECK FOR TEMP
   return (
     <div className="App">
-      <Context.Provider value={{ firebase, weatherData }}>
-        <ClearN />
+      <Helmet>
+        <html data-theme={isDay === 0 ? "night" : "day"} />
+        {/* day, night, day-hazy */}
+      </Helmet>
+      <Context.Provider
+        value={{ firebase, weatherData, bgTextSize, tempLength }}
+      >
+        {isDay === 0 ? <ClearN /> : <Clear />}
+        {/* CHANGE 0 AND 1 */}
         {/* <h1>login system</h1>
         <form
           onSubmit={(e) => {
