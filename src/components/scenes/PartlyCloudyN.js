@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Helmet } from "react-helmet";
 import { Context } from "../Context";
 import lottie from "lottie-web";
 import clear from "../../lottie/clear.json";
 
-export const Clear = () => {
+export const PartlyCloudyN = () => {
   const { weatherData, bgTextSize, tempLength } = useContext(Context);
   const [timeTop, setTimeTop] = useState("01");
   const [timeBottom, setTimeBottom] = useState("22");
@@ -42,9 +41,6 @@ export const Clear = () => {
   }, []);
   return (
     <div className="clear">
-      <Helmet>
-        <html data-theme="day"></html>
-      </Helmet>
       <div className="icon" ref={container}></div>
       {weatherData.tempC !== "" ? (
         <>

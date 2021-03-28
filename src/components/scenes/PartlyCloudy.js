@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 
 import { Context } from "../Context";
 import lottie from "lottie-web";
-import clearN from "../../lottie/clearN.json";
+import partlyCloudy from "../../lottie/partlyCloudy.json";
 
-export const ClearN = () => {
+export const PartlyCloudy = () => {
   const { weatherData, bgTextSize, tempLength } = useContext(Context);
   const container = useRef(null);
   const [F, setF] = useState(true);
@@ -22,7 +22,7 @@ export const ClearN = () => {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: clearN, // the path to the animation json
+      animationData: partlyCloudy, // the path to the animation json
     });
   }, []);
 

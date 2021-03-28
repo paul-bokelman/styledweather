@@ -22,6 +22,7 @@
   }
 }
 
+//# CLEAR N
 .clearN {
   .icon {
     position: fixed;
@@ -107,6 +108,7 @@
   }
 }
 
+//#CLEAR
 .clear {
   .icon {
     position: fixed;
@@ -171,6 +173,178 @@
     h3 {
       margin-top: -7.8vw;
       font-size: 1.45vw;
+    }
+  }
+}
+
+//# partlyCloudy
+.partlyCloudy {
+  .icon {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18vw;
+  }
+
+  .bgTxt {
+    opacity: 1%;
+    color: white;
+  }
+
+  .temp {
+    position: fixed;
+    top: 50%;
+    right: 20%;
+    transform: translate(-50%, -50%);
+    color: #3e4495;
+    .one {
+      font-size: 11vw;
+      transform: translate(-100%, 0%);
+      span {
+        transform: translate(30%, -50%);
+      }
+    }
+    .two {
+      font-size: 11vw;
+    }
+    .three {
+      font-size: 11vw;
+      transform: translate(50%, 0%);
+      span {
+        transform: translate(-40%, -50%);
+      }
+    }
+    span {
+      color: #3e4495;
+      position: absolute;
+      top: 34%;
+      right: -18%;
+      font-size: 3vw;
+      opacity: 59%;
+    }
+  }
+
+  .condition {
+    position: fixed;
+    top: 50%;
+    right: 52%;
+    transform: translate(-50%, -70%);
+    white-space: nowrap;
+    h2 {
+      font-size: 8vw;
+      color: #3e4495;
+      text-transform: uppercase;
+      margin-bottom: -3.9vw;
+    }
+
+    ul {
+      top: -2%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .item {
+      font-weight: 700;
+      font-size: 2.7vw;
+      color: #3e4495;
+      opacity: 59%;
+    }
+
+    .time {
+      margin-left: 0.5vw;
+      float: left;
+    }
+    .date {
+      float: right;
+    }
+  }
+}
+
+//# partlyCloudyN
+.partlyCloudyN {
+  .icon {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18vw;
+  }
+
+  .bgTxt {
+    opacity: 1%;
+    color: white;
+  }
+
+  .temp {
+    position: fixed;
+    top: 50%;
+    right: 20%;
+    transform: translate(-50%, -50%);
+    color: #3e4495;
+    .one {
+      font-size: 11vw;
+      transform: translate(-100%, 0%);
+      span {
+        transform: translate(30%, -50%);
+      }
+    }
+    .two {
+      font-size: 11vw;
+    }
+    .three {
+      font-size: 11vw;
+      transform: translate(50%, 0%);
+      span {
+        transform: translate(-40%, -50%);
+      }
+    }
+    span {
+      color: #3e4495;
+      position: absolute;
+      top: 34%;
+      right: -18%;
+      font-size: 3vw;
+      opacity: 59%;
+    }
+  }
+
+  .condition {
+    position: fixed;
+    top: 50%;
+    right: 52%;
+    transform: translate(-50%, -70%);
+    white-space: nowrap;
+    h2 {
+      font-size: 8vw;
+      color: #3e4495;
+      text-transform: uppercase;
+      margin-bottom: -3.9vw;
+    }
+
+    ul {
+      top: -2%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .item {
+      font-weight: 700;
+      font-size: 2.7vw;
+      color: #3e4495;
+      opacity: 59%;
+    }
+
+    .time {
+      margin-left: 0.5vw;
+      float: left;
+    }
+    .date {
+      float: right;
     }
   }
 }
